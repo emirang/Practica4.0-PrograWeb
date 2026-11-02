@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:simpleType name="cantidadNutricional">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="gramos">
+        <xs:simpleContent>
+            <xs:extension base="cantidadNutricional">
+                <xs:attribute name="unidad" type="xs:string" use="required" fixed="g"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="miligramos">
+        <xs:simpleContent>
+            <xs:extension base="cantidadNutricional">
+                <xs:attribute name="unidad" type="xs:string" use="required" fixed="mg"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:element name="nutricion">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="producto" type="xs:string"/>
+                <xs:element name="tamanoPorcion">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="cantidad" type="xs:positiveInteger"/>
+                            <xs:element name="unidad" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="informacionNutricional">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="calorias" type="cantidadNutricional"/>
+                            <xs:element name="caloriasDeGrasa" type="cantidadNutricional"/>
+                            <xs:element name="grasaTotal" type="gramos"/>
+                            <xs:element name="grasaSaturada" type="gramos"/>
+                            <xs:element name="colesterol" type="miligramos"/>
+                            <xs:element name="sodio" type="miligramos"/>
+                            <xs:element name="carbohidratosTotales" type="gramos"/>
+                            <xs:element name="fibra" type="gramos"/>
+                            <xs:element name="azucares" type="gramos"/>
+                            <xs:element name="proteina" type="gramos"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

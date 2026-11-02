@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="nutricion.xsl"?>
+<nutricion xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="nutrition.xml">
+    <producto>Galletas Grandma White</producto>
+
+    <tamanoPorcion>
+        <cantidad>1</cantidad>
+        <unidad>paquete</unidad>
+    </tamanoPorcion>
+
+    <informacionNutricional>
+        <calorias>260</calorias>
+        <caloriasDeGrasa>100</caloriasDeGrasa>
+        <grasaTotal unidad="g">11</grasaTotal>
+        <grasaSaturada unidad="g">2</grasaSaturada>
+        <colesterol unidad="mg">5</colesterol>
+        <sodio unidad="mg">210</sodio>
+        <carbohidratosTotales unidad="g">36</carbohidratosTotales>
+        <fibra unidad="g">2</fibra>
+        <azucares unidad="g">15</azucares>
+        <proteina unidad="g">5</proteina>
+    </informacionNutricional>
+</nutricion>
