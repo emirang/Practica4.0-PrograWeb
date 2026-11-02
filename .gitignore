@@ -1,0 +1,19 @@
+# Dependencias
+node_modules/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Registros y temporales
+*.log
+*.tmp
+.env
+.env.*
+!.env.example
+
+# Configuración local del editor
+.vscode/
+.idea/
+*.swp
