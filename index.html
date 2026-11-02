@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explora personajes del multiverso con búsqueda, filtros y paginación. Datos públicos obtenidos en tiempo real mediante la API REST de Rick and Morty.">
+    <meta name="theme-color" content="#070b16">
+    <title>Multiverso | Explorador de personajes</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a class="brand" href="./" aria-label="Multiverso, ir al inicio">
+                <span class="brand__mark" aria-hidden="true">
+                    <svg viewBox="0 0 48 48" focusable="false">
+                        <circle cx="24" cy="24" r="21" class="brand__halo"/>
+                        <ellipse cx="24" cy="24" rx="19" ry="12" class="brand__orbit" transform="rotate(-28 24 24)"/>
+                        <ellipse cx="24" cy="24" rx="12" ry="19" class="brand__orbit brand__orbit--soft" transform="rotate(28 24 24)"/>
+                        <circle cx="24" cy="24" r="6.5" class="brand__core"/>
+                    </svg>
+                </span>
+                <span class="brand__text">MULTI<strong>VERSO</strong></span>
+            </a>
+
+            <nav class="site-nav" aria-label="Navegación principal">
+                <a href="#buscador">Buscar</a>
+                <a href="#resultados">Personajes</a>
+                <a class="site-nav__external" href="https://rickandmortyapi.com/documentation" target="_blank" rel="noopener noreferrer">
+                    API docs
+                    <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                        <path d="M5 3h8v8M13 3 6.5 9.5M11 8v5H3V5h5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="contenido">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero__copy">
+                <p class="eyebrow">
+                    <span class="live-dot" aria-hidden="true"></span>
+                    Datos en vivo · Rick and Morty API
+                </p>
+                <h1 id="hero-title">Explora el <span class="gradient-text">multiverso</span>, un personaje a la vez.</h1>
+                <p class="hero__lead">
+                    Busca, filtra y descubre información pública de personajes de todas las dimensiones.
+                    Una integración directa con un servicio REST, sin captura manual de datos.
+                </p>
+                <a class="hero__cta" href="#buscador">
+                    Empezar a explorar
+                    <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                        <path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+
+            <aside class="hero__panel" aria-label="Resumen de la base de datos">
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat__value" id="stat-total">—</span>
+                        <span class="stat__label">coincidencias</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__value" id="stat-pages">—</span>
+                        <span class="stat__label">páginas</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__value">100%</span>
+                        <span class="stat__label">datos públicos</span>
+                    </div>
+                </div>
+                <div class="hero__panel-note">
+                    <span class="pulse-badge" aria-hidden="true"></span>
+                    <p>Consulta en tiempo real a <strong>rickandmortyapi.com</strong></p>
+                </div>
+            </aside>
+        </section>
+
+        <section class="search-panel" id="buscador" aria-labelledby="search-title">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Búsqueda avanzada</p>
+                    <h2 id="search-title">Encuentra tu personaje</h2>
+                </div>
+                <p class="section-heading__hint">Los filtros se combinan entre sí para afinar los resultados.</p>
+            </div>
+
+            <form id="search-form" class="search-form">
+                <div class="search-form__grid">
+                    <div class="field field--name">
+                        <label for="name">Nombre</label>
+                        <div class="input-shell">
+                            <svg class="input-shell__icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                                <circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.7"/>
+                                <path d="m13 13 4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                            </svg>
+                            <input id="name" name="name" type="search" placeholder="Ej. Rick, Morty, Summer..." autocomplete="off">
+                            <button type="button" class="input-shell__clear" id="clear-name" aria-label="Limpiar el nombre" hidden>×</button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="status">Estado</label>
+                        <select id="status" name="status">
+                            <option value="">Todos</option>
+                            <option value="alive">Vivo</option>
+                            <option value="dead">Muerto</option>
+                            <option value="unknown">Desconocido</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="species">Especie</label>
+                        <select id="species" name="species">
+                            <option value="">Todas</option>
+                            <option value="Human">Humano</option>
+                            <option value="Alien">Alienígena</option>
+                            <option value="Humanoid">Humanoide</option>
+                            <option value="Robot">Robot</option>
+                            <option value="Animal">Animal</option>
+                            <option value="Mythological Creature">Criatura mitológica</option>
+                            <option value="unknown">Desconocida</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="gender">Género</label>
+                        <select id="gender" name="gender">
+                            <option value="">Todos</option>
+                            <option value="female">Femenino</option>
+                            <option value="male">Masculino</option>
+                            <option value="genderless">Sin género</option>
+                            <option value="unknown">Desconocido</option>
+                        </select>
+                    </div>
+
+                    <button class="button button--primary search-form__submit" type="submit">
+                        Buscar
+                        <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                            <path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="search-form__footer">
+                    <p class="active-filters" id="active-filters">Mostrando todos los personajes.</p>
+                    <button class="text-button" id="reset-filters" type="button">Limpiar filtros</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="results" id="resultados" aria-labelledby="results-title">
+            <div class="results__header">
+                <div>
+                    <p class="eyebrow">Directorio</p>
+                    <h2 id="results-title">Personajes</h2>
+                </div>
+                <p class="results__count" id="results-count" aria-live="polite">Cargando personajes…</p>
+            </div>
+
+            <div class="cards-grid" id="cards-grid" aria-busy="true"></div>
+
+            <section class="feedback" id="empty-state" aria-labelledby="empty-title" hidden>
+                <span class="feedback__icon" aria-hidden="true">
+                    <svg viewBox="0 0 48 48" focusable="false">
+                        <circle cx="21" cy="21" r="13" fill="none" stroke="currentColor" stroke-width="3"/>
+                        <path d="m31 31 10 10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M16 21h10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <h3 id="empty-title">No encontramos personajes</h3>
+                <p>Ningún resultado coincide con esta combinación de filtros. Prueba con otro nombre o elimina algún filtro.</p>
+                <button class="button button--secondary" id="empty-reset" type="button">Ver todos los personajes</button>
+            </section>
+
+            <section class="feedback feedback--error" id="error-state" aria-labelledby="error-title" hidden>
+                <span class="feedback__icon" aria-hidden="true">
+                    <svg viewBox="0 0 48 48" focusable="false">
+                        <path d="M24 8 43 41H5L24 8Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+                        <path d="M24 18v10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="24" cy="34" r="2" fill="currentColor"/>
+                    </svg>
+                </span>
+                <h3 id="error-title">No pudimos cargar la información</h3>
+                <p id="error-message">Ocurrió un problema al conectar con el servicio. Revisa tu conexión e inténtalo de nuevo.</p>
+                <button class="button button--secondary" id="retry-button" type="button">Reintentar</button>
+            </section>
+
+            <nav class="pagination" id="pagination" aria-label="Paginación de personajes" hidden>
+                <button class="button button--pagination" id="prev-page" type="button">
+                    <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                        <path d="M16 10H5M9 5l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Anterior
+                </button>
+                <p class="pagination__status" id="page-info">Página 1</p>
+                <button class="button button--pagination" id="next-page" type="button">
+                    Siguiente
+                    <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                        <path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </nav>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>
+            Proyecto académico de integración de APIs REST.
+            Datos proporcionados por <a href="https://rickandmortyapi.com/" target="_blank" rel="noopener noreferrer">The Rick and Morty API</a>.
+        </p>
+        <p class="site-footer__meta">HTML5 · CSS3 · JavaScript · Fetch API</p>
+    </footer>
+
+    <dialog class="character-dialog" id="character-dialog" aria-labelledby="dialog-title">
+        <div class="character-dialog__shell">
+            <button class="character-dialog__close" id="close-dialog" type="button" aria-label="Cerrar ficha del personaje">×</button>
+            <div class="character-dialog__content" id="dialog-content"></div>
+        </div>
+    </dialog>
+
+    <noscript>
+        <p class="noscript">Este proyecto necesita JavaScript para consultar la API y mostrar los personajes.</p>
+    </noscript>
+</body>
+</html>
