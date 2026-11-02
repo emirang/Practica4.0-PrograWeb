@@ -5,6 +5,7 @@ Aplicación web que consume la API REST pública **The Rick and Morty API** para
 Este proyecto moderniza la Unidad 4: sustituye la práctica centrada únicamente en XML por una integración web basada en **JSON**, **Fetch API**, **async/await** y manipulación dinámica del DOM.
 
 [![Demo en GitHub Pages](https://img.shields.io/badge/Demo-GitHub%20Pages-9cff57?style=for-the-badge&logo=github)](https://emirang.github.io/Practica4.0-PrograWeb/)
+[![Repositorio](https://img.shields.io/badge/Repositorio-emirang%2FPractica4.0--PrograWeb-5fe4ff?style=for-the-badge&logo=github)](https://github.com/emirang/Practica4.0-PrograWeb)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
@@ -170,11 +171,13 @@ El proyecto está preparado para GitHub Pages porque no requiere backend ni comp
 4. Elegir la rama `main` y la carpeta `/ (root)`.
 5. Guardar y esperar a que GitHub publique el sitio.
 
-URL esperada:
+URL pública:
 
 ```text
 https://emirang.github.io/Practica4.0-PrograWeb/
 ```
+
+El sitio fue publicado correctamente y comprobado desde la URL pública: la página principal, los estilos, el JavaScript y las imágenes responden con HTTP 200, y la aplicación muestra los datos obtenidos de la API.
 
 ## Correspondencia con la actividad
 
